@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import HelloComponent from './component/HelloComponent';
-import StateFullComponent from './container/StateFullComponent';
-import YoutubeComp from './component/YoutubeComp/YoutubeComp';
+// import HelloComponent from './component/HelloComponent';
+// import StateFullComponent from './container/StateFullComponent';
+// import YoutubeComp from './component/YoutubeComp/YoutubeComp';
+import Home from './container/Home/Home';
 
 // const HelloComponent = () => {
 //   return <p>Hello Functional Component</p>
@@ -23,7 +24,7 @@ import YoutubeComp from './component/YoutubeComp/YoutubeComp';
 
 ReactDOM.render(
   <React.StrictMode>
-    <YoutubeComp />
+    <Home />
   </React.StrictMode>,
   document.getElementById('root')
 );
