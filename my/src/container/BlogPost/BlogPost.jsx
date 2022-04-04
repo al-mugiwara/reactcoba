@@ -12,7 +12,8 @@ class BlogPost extends Component {
             title:'',
             body:'',
             userId:1
-        }
+        },
+        isupdate : false
     }
 
     getPostAPI = () => {
@@ -30,6 +31,31 @@ class BlogPost extends Component {
             this.getPostAPI()
         }, (err) => {
             console.log('error : ',err)
+        })
+        this.setState({
+            formBlogPost:{
+                id:1,
+                title:'',
+                body:'',
+                userId:1
+            }   
+        })
+        
+    }
+
+    putDataToAPI = () => {
+        axios.put(`http://localhost:3004/posts/${this.state.formBlogPost.id}`,this.state.formBlogPost).then((res) => {
+            console.log(res);
+            this.getPostAPI()
+        })
+        this.setState({
+            isupdate:false,
+            formBlogPost:{
+                id:1,
+                title:'',
+                body:'',
+                userId:1
+            }   
         })
     }
 
@@ -53,24 +79,35 @@ class BlogPost extends Component {
     }
     handleSubmit = () => {
         //console.log(this.state.formBlogPost);
-        this.postDataToAPI()
+        if(this.state.isupdate){
+            this.putDataToAPI()
+        }else{
+            this.postDataToAPI()
+        }
     }
 
     handleUpdate = (data) => {
-        console.log(data)
+         console.log(data)
+         this.setState({
+             formBlogPost: data,
+             isupdate:true
+         })
+        
     }
 
     handelFormChange = (event) => {
         //console.log('form change',event.target)
         let formBlogPostNew = {...this.state.formBlogPost};
         let timestamp = new Date().getTime();
-        formBlogPostNew['id'] = timestamp;
+        if(!this.state.isupdate){
+            formBlogPostNew['id'] = timestamp;
+        }
         console.log(timestamp)
         // console.log('init value : ',this.state.formBlogPost)
         // console.log('new value : ',formBlogPostNew)
        // console.log(event.target.name)
         formBlogPostNew[event.target.name] = event.target.value;
-        let title = event.target.value
+        //let title = event.target.value
         this.setState({
             formBlogPost:formBlogPostNew
         }, () => {
@@ -84,9 +121,9 @@ class BlogPost extends Component {
                 <p className="section-title">Blog Post</p>
                 <div className="form-add-post">
                     <label htmlFor="title">Title</label> 
-                    <input type="text" name="title" placeholder="add title" onChange={this.handelFormChange}/>
+                    <input type="text" name="title" placeholder="add title" onChange={this.handelFormChange} value={this.state.formBlogPost.title}/>
                     <label htmlFor="body"> Blog Content</label>
-                    <textarea htmlFor="body" name="body" id="body" cols="30" rows="10" placeholder="add blog content" onChange={this.handelFormChange}></textarea>
+                    <textarea htmlFor="body" name="body" id="body" cols="30" rows="10" placeholder="add blog content" onChange={this.handelFormChange} value={this.state.formBlogPost.body}></textarea>
                     <button className="btn-submit" onClick={this.handleSubmit}>Simpan</button>
                 </div>
                 {
