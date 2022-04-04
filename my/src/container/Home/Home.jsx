@@ -1,8 +1,15 @@
-import React, { Component } from 'react';
-// import YoutubeComp from '../../component/YoutubeComp/YoutubeComp';
-// import Product from '../Product/Product';
-// import LifeCycleComp from '../LifeCycleComp/LifeCycleComp';
-import BlogPost from '../BlogPost/BlogPost';
+//libraries
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+//pages
+import YoutubeComp from '../../component/YoutubeComp/YoutubeComp';
+import Product from '../pages/Product/Product';
+import LifeCycleComp from '../pages/LifeCycleComp/LifeCycleComp';
+import BlogPost from '../pages/BlogPost/BlogPost';
+import YoutubeCompPage from '../pages/YoutubeCompPage/YoutubeCompPage';
+import DetailPost from '../pages/BlogPost/DetailPost/DetailPost';
+//style
+import './Home.css';
 
 class Home extends Component {
     state = {
@@ -14,46 +21,64 @@ class Home extends Component {
         //         showComponent:false
         //     })
         // },15000)
-        
+
     }
     render() {
         return (
-            <div>
-                {/* <p>YoutubeComp</p>
-                <hr />
-                <YoutubeComp
-                    time="7.12"
-                    title="Tutorial 1"
-                    desc="2x ditonton, 2 hari yang lalu"
-                />
-                <YoutubeComp
-                    time="8.12"
-                    title=" Tutorial 2"
-                    desc="200x ditonton, 10 hari yang lalu"
-                />
-                <YoutubeComp
-                    time="5.04"
-                    title="Tutorial 3"
-                    desc="500x ditonton, 4 hari yang lalu"
-                />
-                <YoutubeComp
-                    time="4.12"
-                    title=" Tutorial 4"
-                    desc="1k ditonton, 14 hari yang lalu"
-                />
-                <YoutubeComp /> */}
-                {/* <p>Counter</p>
-                <hr />
-                <Product /> */}
-                {/* <p>LifCycle Component</p>
-                <hr />
-                {
-                    this.state.showComponent ? <LifeCycleComp /> : null
-                } */}
-                <p>BlogPost</p>
-                <hr/>
-                <BlogPost />
-            </div>
+            <Router>
+                <Fragment>
+                    <div className="navigation">
+                        <Link to="/">BlogPost</Link>
+                        <Link to="/product">Product</Link>
+                        <Link to="/lifecycle">Lifecycle</Link>
+                        <Link to="/youtube-component">Youtube</Link>
+                    </div>
+                    <Routes>
+                        <Route path="/" exact element={<BlogPost />} />
+                        <Route path="/detail-post/:Postid" element={<DetailPost />}/>
+                        <Route path="/product" element={<Product />} />
+                        <Route path="/lifecycle" element={<LifeCycleComp />} />
+                        <Route path="/youtube-component" element={<YoutubeCompPage />} />
+                    </Routes>
+                </Fragment>
+            </Router>
+            //   {/* <div>
+            //         <p>YoutubeComp</p>
+            //         <hr />
+            //         <YoutubeComp
+            //             time="7.12"
+            //             title="Tutorial 1"
+            //             desc="2x ditonton, 2 hari yang lalu"
+            //         />
+            //         <YoutubeComp
+            //             time="8.12"
+            //             title=" Tutorial 2"
+            //             desc="200x ditonton, 10 hari yang lalu"
+            //         />
+            //         <YoutubeComp
+            //             time="5.04"
+            //             title="Tutorial 3"
+            //             desc="500x ditonton, 4 hari yang lalu"
+            //         />
+            //         <YoutubeComp
+            //             time="4.12"
+            //             title=" Tutorial 4"
+            //             desc="1k ditonton, 14 hari yang lalu"
+            //         />
+            //         <YoutubeComp />
+            //         <p>Counter</p>
+            //         <hr />
+            //         <Product />
+            //         <p>LifCycle Component</p>
+            //         <hr />
+            //         {
+            //             this.state.showComponent ? <LifeCycleComp /> : null
+            //         }
+            //         <p>BlogPost</p>
+            //         <hr />
+            //         <BlogPost />
+            //     </div> */}
+
         )
     }
 }
