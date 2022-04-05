@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import ActionType from '../../../../redux/reducer/globalActionType';
+import { GlobalConsumer } from '../../../../context/Context';
 
 
 class Counter extends Component {
@@ -34,28 +35,32 @@ class Counter extends Component {
     // }
 
     render() {
-        console.log(this.props);
+        console.log(this);
         return (
             <div className="counter">
-                <button className="minus" onClick={this.props.handleMinus}>-</button>
-                <input type="text" value={this.props.order} />
-                <button className="plus" onClick={this.props.handlePlus}>+</button>
+                <button className="minus" onClick={() => this.props.dispatch({ type: 'MINUS_ORDER' })}>-</button>
+                {/* <button className="minus" onClick={this.props.handleMinus}>-</button> */}
+                <input type="text" value={this.props.state.totalOrder} />
+                {/* <input type="text" value={this.props.order} /> */}
+                <button className="plus" onClick={() => this.props.dispatch({ type: 'PLUS_ORDER' })}>+</button>
+                {/* <button className="plus" onClick={this.props.handlePlus}>+</button> */}
             </div>
         )
     }
 }
 
-const mapStateToProps  = (state) => {
-    return {
-        order: state.totalOrder
-    }
-}
+// const mapStateToProps  = (state) => {
+//     return {
+//         order: state.totalOrder
+//     }
+// }
 
-const mapDispatchToProps = (dispatch) => {
-    return{
-        handlePlus: () => dispatch({type:ActionType.PLUS_ORDER}),
-        handleMinus:() => dispatch({type:ActionType.MINUS_ORDER})
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return{
+//         handlePlus: () => dispatch({type:ActionType.PLUS_ORDER}),
+//         handleMinus:() => dispatch({type:ActionType.MINUS_ORDER})
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default GlobalConsumer(Counter);
+//export default connect(mapStateToProps, mapDispatchToProps)(Counter);

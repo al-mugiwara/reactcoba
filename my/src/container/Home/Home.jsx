@@ -1,5 +1,5 @@
 //libraries
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, createContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 //pages
 import YoutubeComp from '../../component/YoutubeComp/YoutubeComp';
@@ -10,11 +10,11 @@ import YoutubeCompPage from '../pages/YoutubeCompPage/YoutubeCompPage';
 import DetailPost from '../pages/BlogPost/DetailPost/DetailPost';
 //style
 import './Home.css';
+import GlobalProvider from '../../context/Context';
+import Hooks from '../pages/Hooks/Hooks';
+
 
 class Home extends Component {
-    state = {
-        showComponent: true
-    }
     componentDidMount() {
         // setTimeout(()=>{
         //     this.setState({
@@ -27,20 +27,22 @@ class Home extends Component {
         return (
             <Router>
                 <Fragment>
-                    <div className="navigation">
-                        <Link to="/">BlogPost</Link>
-                        <Link to="/product">Product</Link>
-                        <Link to="/lifecycle">Lifecycle</Link>
-                        <Link to="/youtube-component">Youtube</Link>
-                    </div>
-                    <Routes>
-                        <Route path="/" exact element={<BlogPost />} />
-                        <Route path="/detail-post/:Postid" element={<DetailPost />}/>
-                        <Route path="/product" element={<Product />} />
-                        <Route path="/lifecycle" element={<LifeCycleComp />} />
-                        <Route path="/youtube-component" element={<YoutubeCompPage />} />
-                    </Routes>
-                </Fragment>
+                        <div className="navigation">
+                            <Link to="/">BlogPost</Link>
+                            <Link to="/product">Product</Link>
+                            <Link to="/lifecycle">Lifecycle</Link>
+                            <Link to="/youtube-component">Youtube</Link>
+                            <Link to="/hooks">Hooks</Link>
+                        </div>
+                        <Routes>
+                            <Route path="/" exact element={<BlogPost />} />
+                            <Route path="/detail-post/:Postid" element={<DetailPost />} />
+                            <Route path="/product" element={<Product />} />
+                            <Route path="/lifecycle" element={<LifeCycleComp />} />
+                            <Route path="/youtube-component" element={<YoutubeCompPage />} />
+                            <Route path="/hooks" element={<Hooks />} />
+                        </Routes>
+                    </Fragment>
             </Router>
             //   {/* <div>
             //         <p>YoutubeComp</p>
@@ -83,4 +85,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default GlobalProvider(Home);

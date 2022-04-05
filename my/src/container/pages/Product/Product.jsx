@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import './Product.css';
 import CardProduct from './CardProduct/CardProduct';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { GlobalConsumer } from '../../../context/Context';
+// import { RootContext } from '../../Home/Home';
 class Product extends Component {
     // state = {
     //     order:4,
@@ -25,21 +27,21 @@ class Product extends Component {
                 </div>
                 <div className="troley">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc7q1_pV_-mDqrhh5ffBqDgsNbeeZuB2N_xQ&usqp=CAU" alt="" />
-                    <div className="count">{this.props.order}</div>
+                    <div className="count">{this.props.state.totalOrder}</div>
                 </div>
             </div>
-               <CardProduct  /> 
-               {/* childcomponent counterchange terserah isinya*/}
-            </Fragment>
-
+            <CardProduct />
+            {/* childcomponent counterchange terserah isinya*/}
+        </Fragment>
         );
     }
 }
 
-const mapStateToProps  = (state) => {
+const mapStateToProps = (state) => {
     return {
         order: state.totalOrder
     }
 }
 
-export default connect(mapStateToProps) (Product);
+export default GlobalConsumer(Product);
+//export default connect(mapStateToProps) (Product);
